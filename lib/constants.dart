@@ -2,54 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:persona/size_config.dart';
 
 // clolors that we use in our app
-const kMainColor = Color(0xFF9297FF);
-const kActiveColor = Colors.white;
-const kBodyTextColor = Color(0xFF707070);
+const kMainColor = Colors.white;
+const kActiveColor = Color(0xFF9297FF);
+const kTextColor = Color(0xFF707070);
 const kBgColor = Colors.white;
 
 // Text Styles
-final TextStyle kH1TextStyle = TextStyle(
-  fontFamily: 'NotoSans',
-  fontSize: getProportionateScreenWidth(34),
-  fontWeight: FontWeight.w500,
-  letterSpacing: 0.22,
-);
-
-final TextStyle kH2TextStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(28),
-  fontWeight: FontWeight.w600,
-  letterSpacing: 0.18,
-);
-
-final TextStyle kH3TextStyle = kH2TextStyle.copyWith(
-  fontSize: getProportionateScreenWidth(20),
-  letterSpacing: 0.14,
-);
 
 final TextStyle kHeadlineTextStyle = TextStyle(
   fontFamily: 'NotoSans',
   fontSize: 17,
-  color: kMainColor,
+  color: kActiveColor,
   fontWeight: FontWeight.bold,
-);
-
-final TextStyle kSubHeadTextStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(18),
-  fontWeight: FontWeight.w500,
-  color: kMainColor,
-  letterSpacing: 0.44,
 );
 
 final TextStyle kBodyTextStyle = TextStyle(
   fontSize: 15,
-  color: kBodyTextColor,
+  color: kTextColor,
   //height: 1.5,
 );
 
-final TextStyle kSecondaryBodyTextStyle = TextStyle(
+final TextStyle kSecondaryTextStyle = TextStyle(
   fontSize: getProportionateScreenWidth(14),
   fontWeight: FontWeight.w500,
-  color: kMainColor,
+  color: kTextColor,
   // height: 1.5,
 );
 
@@ -57,12 +33,6 @@ final TextStyle kButtonTextStyle = TextStyle(
   color: Colors.white,
   fontSize: 13,
   fontWeight: FontWeight.bold,
-);
-
-final TextStyle kCaptionTextStyle = TextStyle(
-  color: kMainColor.withOpacity(0.64),
-  fontSize: getProportionateScreenWidth(12),
-  fontWeight: FontWeight.w600,
 );
 
 // padding
