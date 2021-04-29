@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
               onTap: () {},
               child: Container(
                 width: 400,
-                height: 500,
+                height: 400,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
