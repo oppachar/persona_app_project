@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
 import 'package:persona/size_config.dart';
-import 'package:persona/widgets/buttons/primary_button.dart';
 import 'package:persona/widgets/cards/card.dart';
 
 class HomeScreen extends StatelessWidget {
+  final User user;
+  HomeScreen(this.user);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:persona/widgets/buttons/primary_button.dart';
 
 import '../../../constants.dart';
@@ -96,16 +97,16 @@ class _SignInFormState extends State<SignInForm> {
           PrimaryButton(
             text: "로그인",
             press: () async {
-              // if (_formKey.currentState.validate()) {
-              //   _signInWithEmailAndPassword().then((user) {
-              //     if (user != null) {
-              //       Navigator.pushReplacement(
-              //           context,
-              //           MaterialPageRoute(
-              //               builder: (context) => BottomNavBar(user)));
-              //     } else {}
-              //   });
-              // }
+              if (_formKey.currentState.validate()) {
+                _signInWithEmailAndPassword().then((user) {
+                  if (user != null) {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BottomNavBar(user)));
+                  } else {}
+                });
+              }
             },
           ),
         ],
@@ -133,38 +134,38 @@ class _SignInFormState extends State<SignInForm> {
   }
 
   // Example code of how to sign in with email and password.
-  // Future<User> _signInWithEmailAndPassword() async {
-  //   try {
-  //     final User user = (await _auth.signInWithEmailAndPassword(
-  //       email: _emailController.text,
-  //       password: _passwordController.text,
-  //     ))
-  //         .user;
-  //     return user;
-  //   } on FirebaseAuthException catch (e) {
-  //     switch (e.code) {
-  //       case 'invalid-email':
-  //         showErrDialog(context, '이메일 형식이 맞지 않습니다.');
-  //         break;
-  //       case 'wrong-password':
-  //         showErrDialog(context, '비밀번호가 올바르지 않습니다.');
-  //         break;
-  //       case 'user-not-found':
-  //         showErrDialog(context, '가입된 이메일이 아닙니다.');
-  //         break;
-  //       case 'user-disabled':
-  //         showErrDialog(context, e.code);
-  //         break;
-  //       case 'too-many-requests':
-  //         showErrDialog(context, e.code);
-  //         break;
-  //       case 'operation-not-allowed':
-  //         showErrDialog(context, e.code);
-  //         break;
-  //     }
-  //     return null;
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  Future<User> _signInWithEmailAndPassword() async {
+    try {
+      final User user = (await _auth.signInWithEmailAndPassword(
+        email: _emailController.text,
+        password: _passwordController.text,
+      ))
+          .user;
+      return user;
+    } on FirebaseException catch (e) {
+      switch (e.code) {
+        case 'invalid-email':
+          showErrDialog(context, '이메일 형식이 맞지 않습니다.');
+          break;
+        case 'wrong-password':
+          showErrDialog(context, '비밀번호가 올바르지 않습니다.');
+          break;
+        case 'user-not-found':
+          showErrDialog(context, '가입된 이메일이 아닙니다.');
+          break;
+        case 'user-disabled':
+          showErrDialog(context, e.code);
+          break;
+        case 'too-many-requests':
+          showErrDialog(context, e.code);
+          break;
+        case 'operation-not-allowed':
+          showErrDialog(context, e.code);
+          break;
+      }
+      return null;
+    } catch (e) {
+      print(e);
+    }
+  }
 }

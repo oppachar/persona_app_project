@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -9,7 +10,8 @@ import 'home/home_screen.dart';
 import 'mypage/mypage_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
-  BottomNavBar();
+  final User user;
+  BottomNavBar(this.user);
   @override
   _BottomNavBarState createState() => _BottomNavBarState();
 }
@@ -28,9 +30,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
   void initState() {
     super.initState();
     _screens = [
-      HomeScreen(),
-      ResultScreen(),
-      MypageScreen(),
+      HomeScreen(widget.user),
+      ResultScreen(widget.user),
+      MypageScreen(widget.user),
     ];
   }
 

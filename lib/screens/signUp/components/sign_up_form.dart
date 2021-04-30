@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:persona/screens/signIn/sign_in_screen.dart';
 import 'package:persona/widgets/buttons/primary_button.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../constants.dart';
 import '../../../size_config.dart';
 
@@ -359,113 +359,86 @@ class _SignUpFormState extends State<SignUpForm> {
               child: PrimaryButton(
                   text: "가입하기",
                   press: () async {
-                    // if (_formKey.currentState.validate()) {
-                    //   if (_value1 == false || _value2 == false) {
-                    //     showDialog(
-                    //         context: context,
-                    //         barrierDismissible: false,
-                    //         builder: (context) {
-                    //           return CupertinoAlertDialog(
-                    //             content: Text(
-                    //               "약관에 동의해주세요",
-                    //               textAlign: TextAlign.center,
-                    //             ),
-                    //             actions: <Widget>[
-                    //               new CupertinoDialogAction(
-                    //                 child: Text(
-                    //                   '확인',
-                    //                   style: TextStyle(fontSize: 13),
-                    //                 ),
-                    //                 onPressed: () {
-                    //                   Navigator.of(context).pop();
-                    //                 },
-                    //               ),
-                    //             ],
-                    //           );
-                    //         });
-                    //   } else {
-                    //     _register().then((User user) {
-                    //       if (user != null) {
-                    //         _userEmail = user.email;
-                    //         user.updateProfile(
-                    //             displayName: _name.text, photoURL: null);
-                    //         FirebaseFirestore.instance
-                    //             .collection("user")
-                    //             .doc(_email.text)
-                    //             .set({
-                    //           'name': _name.text,
-                    //           'email': _email.text,
-                    //           'birth': _birth.text,
-                    //           'address1': _address1.text,
-                    //           'address2': _address2.text,
-                    //           'phone': _phone.text,
-                    //           'certificated': true,
-                    //           'marketing_agreement': _value3
-                    //         });
-                    //         showDialog(
-                    //             context: context,
-                    //             barrierDismissible: false,
-                    //             builder: (context) {
-                    //               return CupertinoAlertDialog(
-                    //                 content: Text(
-                    //                   "회원가입을 축하드립니다!",
-                    //                   textAlign: TextAlign.center,
-                    //                 ),
-                    //                 actions: <Widget>[
-                    //                   new CupertinoDialogAction(
-                    //                       child: Text(
-                    //                         '확인',
-                    //                         style: TextStyle(fontSize: 13),
-                    //                       ),
-                    //                       onPressed: () =>
-                    //                           Navigator.pushReplacement(
-                    //                               context,
-                    //                               MaterialPageRoute(
-                    //                                 builder: (context) =>
-                    //                                     SignInScreen(),
-                    //                               ))),
-                    //                 ],
-                    //               );
-                    //             });
-                    //       }
-                    //     });
-                    // }
-                    //  }
+                    if (_formKey.currentState.validate()) {
+                      _register().then((User user) {
+                        if (user != null) {
+                          _userEmail = user.email;
+                          user.updateProfile(
+                              displayName: _name.text, photoURL: null);
+                          FirebaseFirestore.instance
+                              .collection("user")
+                              .doc(_email.text)
+                              .set({
+                            'name': _name.text,
+                            'email': _email.text,
+                            'birth': _birth.text,
+                            'phone': _phone.text,
+                            'certificated': true,
+                            'marketing_agreement': _value3
+                          });
+                          showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (context) {
+                                return CupertinoAlertDialog(
+                                  content: Text(
+                                    "회원가입을 축하드립니다!",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  actions: <Widget>[
+                                    new CupertinoDialogAction(
+                                        child: Text(
+                                          '확인',
+                                          style: TextStyle(fontSize: 13),
+                                        ),
+                                        onPressed: () =>
+                                            Navigator.pushReplacement(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SignInScreen(),
+                                                ))),
+                                  ],
+                                );
+                              });
+                        }
+                      });
+                    }
                   })),
         ],
       ),
     );
   }
 
-  // showErrDialog(BuildContext context, String err) {
-  //   return Scaffold.of(context).showSnackBar(SnackBar(
-  //     content: Text(
-  //       err,
-  //       textAlign: TextAlign.center,
-  //       textScaleFactor: 1,
-  //       style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
-  //     ),
-  //     backgroundColor: kActiveColor,
-  //   ));
-  // }
+  showErrDialog(BuildContext context, String err) {
+    return Scaffold.of(context).showSnackBar(SnackBar(
+      content: Text(
+        err,
+        textAlign: TextAlign.center,
+        textScaleFactor: 1,
+        style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+      ),
+      backgroundColor: kActiveColor,
+    ));
+  }
 
-  // // Example code for registration.
-  // Future<User> _register() async {
-  //   try {
-  //     final User user = (await _auth.createUserWithEmailAndPassword(
-  //       email: _email.text,
-  //       password: _password.text,
-  //     ))
-  //         .user;
-  //     return user;
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'weak-password') {
-  //       showErrDialog(context, "비밀번호가 취약합니다.");
-  //     } else if (e.code == 'email-already-in-use') {
-  //       showErrDialog(context, "이미 존재하는 계정입니다. 다른 이메일을 입력해주세요.");
-  //     }
-  //   } catch (e) {
-  //     print(e);
-  //   }
-  // }
+  // Example code for registration.
+  Future<User> _register() async {
+    try {
+      final User user = (await _auth.createUserWithEmailAndPassword(
+        email: _email.text,
+        password: _password.text,
+      ))
+          .user;
+      return user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'weak-password') {
+        showErrDialog(context, "비밀번호가 취약합니다.");
+      } else if (e.code == 'email-already-in-use') {
+        showErrDialog(context, "이미 존재하는 계정입니다. 다른 이메일을 입력해주세요.");
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }
