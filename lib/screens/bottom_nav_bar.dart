@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persona/screens/result/result_screen.dart';
-import 'package:persona/screens/root.dart';
-
 import '../size_config.dart';
 import '../constants.dart';
 import 'home/home_screen.dart';
@@ -21,9 +19,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
   int _selectedIndex = 0;
 
   List<Map<String, dynamic>> _navitems = [
-    {"icon": "assets/icons/home.svg", "title": "home"},
-    {"icon": "assets/icons/result.svg", "title": "result"},
-    {"icon": "assets/icons/mypage.svg", "title": "mypage"},
+    {"icon": "assets/icons/home.svg", "title": " "},
+    {"icon": "assets/icons/result.svg", "title": " "},
+    {"icon": "assets/icons/mypage.svg", "title": " "},
   ];
 
   List<Widget> _screens;
@@ -50,8 +48,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
         backgroundColor: Colors.white,
         unselectedItemColor: kTextColor,
         selectedItemColor: kActiveColor,
-        showSelectedLabels: true,
-        showUnselectedLabels: true,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         selectedFontSize: 12,
         items: List.generate(
           _navitems.length,

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:persona/screens/signIn/sign_in_screen.dart';
+import 'package:persona/widgets/buttons/primary_button.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -56,7 +57,7 @@ class _BodyState extends State<Body> {
                               of: 30,
                             ),
                             Text(
-                              widget.user.displayName + "님",
+                              widget.user.displayName + "님 ",
                               textScaleFactor: 1,
                               style: TextStyle(
                                   fontSize: 15,
@@ -75,31 +76,32 @@ class _BodyState extends State<Body> {
             : Padding(
                 padding: const EdgeInsets.all(45.0),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          VerticalSpacing(
+                            of: 100,
+                          ),
+                          Text(
+                            "로그인 후 서비스를 이용할 수 있어요",
+                            style: kHeadlineTextStyle,
+                          ),
                           VerticalSpacing(
                             of: 30,
                           ),
-                          InkWell(
-                            onTap: () => Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SignInScreen(),
-                              ),
-                            ),
-                            child: Text(
-                              "로그인 / 회원가입",
-                              textScaleFactor: 1,
-                              style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                  color: kActiveColor),
-                            ),
+                          SizedBox(
+                            width: 200,
+                            child: PrimaryButton(
+                                text: "로그인 / 회원가입",
+                                press: () => Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SignInScreen(),
+                                    ))),
                           ),
                           VerticalSpacing(),
                         ]),

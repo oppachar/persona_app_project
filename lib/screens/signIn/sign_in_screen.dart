@@ -9,6 +9,7 @@ class SignInScreen extends StatelessWidget {
     SizeConfig().init(context);
     return Scaffold(
       body: Body(),
+      backgroundColor: Colors.white,
     );
   }
 }

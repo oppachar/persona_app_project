@@ -21,28 +21,28 @@ class HomeScreen extends StatelessWidget {
             InkWellCard(
               circular: 30,
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CameraScreen())),
+                  MaterialPageRoute(builder: (context) => CameraScreen(user))),
               child: Container(
                 width: 400,
                 height: 400,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SvgPicture.asset(
-                      "assets/icons/style.svg",
-                      width: 80,
-                    ),
-                    VerticalSpacing(
-                      of: 50,
-                    ),
+                    // SvgPicture.asset(
+                    //   "assets/icons/style.svg",
+                    //   width: 80,
+                    // ),
+                    // VerticalSpacing(
+                    //   of: 50,
+                    // ),
                     Text(
-                      "나와 어울리는 스타일은 무엇인지\n궁금하지 않으셨나요? \n페르소나가 찾아드립니다!",
+                      "나와 어울리는 스타일은 무엇인지\n궁금하지 않으셨나요? \n페르소나가 찾아드립니다 😉",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: kActiveColor,
                           fontSize: 17,
                           height: 1.5,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.bold),
                     ),
                   ],
                 ),

@@ -19,15 +19,10 @@ class _SignUpFormState extends State<SignUpForm> {
   TextEditingController _email = TextEditingController();
   TextEditingController _password = TextEditingController();
   TextEditingController _confirm = TextEditingController();
-  TextEditingController _birth = TextEditingController();
   TextEditingController _name = TextEditingController();
   TextEditingController _phone = TextEditingController();
 
-  bool _success;
   String _userEmail;
-  bool _value1 = false;
-  bool _value2 = false;
-  bool _value3 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -121,7 +116,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 hintText: "6자리 이상 입력해주세요.",
                 hintStyle: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey[500]),
                 border: InputBorder.none,
@@ -160,7 +155,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
                 hintText: "6자리 이상 입력해주세요.",
                 hintStyle: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey[500]),
                 border: InputBorder.none,
@@ -198,7 +193,7 @@ class _SignUpFormState extends State<SignUpForm> {
               decoration: InputDecoration(
                 hintText: "숫자만 입력해주세요",
                 hintStyle: TextStyle(
-                    fontSize: 12,
+                    fontSize: 14,
                     fontWeight: FontWeight.w500,
                     color: Colors.grey[500]),
                 fillColor: Colors.grey[100],
@@ -372,8 +367,6 @@ class _SignUpFormState extends State<SignUpForm> {
                             'name': _name.text,
                             'email': _email.text,
                             'phone': _phone.text,
-                            'certificated': true,
-                            'marketing_agreement': _value3
                           });
                           showDialog(
                               context: context,

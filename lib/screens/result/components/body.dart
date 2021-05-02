@@ -1,8 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
+import 'package:persona/screens/face_analysis_results/face_analysis_results_screen.dart';
 import 'package:persona/widgets/cards/card.dart';
 
 class Body extends StatefulWidget {
+  final User user;
+  Body(this.user);
   @override
   _BodyState createState() => _BodyState();
 }
@@ -19,7 +23,10 @@ class _BodyState extends State<Body> {
               InkWellCard(
                   circular: 30,
                   onTap: () => Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => null)),
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              FaceAnanlysisScreen(widget.user))),
                   child: Container(
                     width: 300,
                     height: 200,

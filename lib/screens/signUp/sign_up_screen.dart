@@ -15,6 +15,7 @@ class SignUpScreen extends StatelessWidget {
             color: kActiveColor,
             onPressed: () => Navigator.pop(context)),
       ),
+      backgroundColor: Colors.white,
       body: Body(),
     );
   }
