@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:persona/screens/find_id/find_id_screen.dart';
+import 'package:persona/screens/find_password/find_pw_screen.dart';
 
 import '../../../constants.dart';
 import '../../../size_config.dart';
@@ -36,8 +38,8 @@ class _BodyState extends State<Body> {
                     onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => null //FindIDScreen(),
-                              ),
+                            builder: (context) => FindIDScreen(),
+                          ),
                         ),
                     child: Text(
                       "이메일 찾기",
@@ -58,8 +60,8 @@ class _BodyState extends State<Body> {
                     onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => null //FindPWScreen(),
-                              ),
+                            builder: (context) => FindPWScreen(),
+                          ),
                         ),
                     child: Text(
                       "비밀번호 찾기",
