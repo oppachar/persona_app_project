@@ -23,9 +23,9 @@ final TextStyle kBodyTextStyle = TextStyle(
 );
 
 final TextStyle kSecondaryTextStyle = TextStyle(
-  fontSize: getProportionateScreenWidth(14),
-  fontWeight: FontWeight.w500,
-  color: kTextColor,
+  fontSize: 14,
+  fontWeight: FontWeight.bold,
+  color: kActiveColor,
   // height: 1.5,
 );
 

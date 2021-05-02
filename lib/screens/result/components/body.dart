@@ -14,37 +14,45 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Center(
-          child: Column(
-            children: [
-              InkWellCard(
-                  circular: 30,
-                  onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              FaceAnanlysisScreen(widget.user))),
-                  child: Container(
-                    width: 300,
-                    height: 200,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          "result1",
-                          style: TextStyle(color: kActiveColor, fontSize: 16),
-                        )
-                      ],
-                    ),
-                  ))
-            ],
-          ),
-        ),
-      ),
-    );
+    return widget.user == null
+        ? Center(
+            child: Text(
+              "로그인 후 이용할 수 있어요🥺",
+              style: kHeadlineTextStyle,
+            ),
+          )
+        : SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Center(
+                child: Column(
+                  children: [
+                    InkWellCard(
+                        circular: 30,
+                        onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    FaceAnanlysisScreen(widget.user))),
+                        child: Container(
+                          width: 300,
+                          height: 200,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "result1",
+                                style: TextStyle(
+                                    color: kActiveColor, fontSize: 16),
+                              )
+                            ],
+                          ),
+                        ))
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 }

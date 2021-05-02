@@ -2,7 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:persona/screens/modify_info/modify_info_screen.dart';
 import 'package:persona/screens/signIn/sign_in_screen.dart';
+import 'package:persona/widgets/alert.dart';
 import 'package:persona/widgets/buttons/primary_button.dart';
 
 import '../../../constants.dart';
@@ -122,49 +124,58 @@ class _BodyState extends State<Body> {
                   style: TextStyle(color: kTextColor, fontSize: 16),
                 ),
                 onPressed: () {
-                  showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (context) {
-                        return CupertinoAlertDialog(
-                          title: Text(
-                            "로그아웃",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                  if (widget.user == null)
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return LoginAlert();
+                        });
+                  else {
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return CupertinoAlertDialog(
+                            title: Text(
+                              "로그아웃",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
                             ),
-                          ),
-                          content: Text(
-                            "정말 로그아웃 하시겠어요?",
-                            style: TextStyle(fontSize: 13, height: 1.3),
-                            textAlign: TextAlign.center,
-                          ),
-                          actions: <Widget>[
-                            new CupertinoDialogAction(
-                                child: Text(
-                                  '아니오',
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                onPressed: () async {
-                                  Navigator.pop(context);
-                                }),
-                            new CupertinoDialogAction(
-                                child: Text(
-                                  '예',
-                                  style: TextStyle(fontSize: 15),
-                                ),
-                                onPressed: () async {
-                                  await FirebaseAuth.instance.signOut();
-                                  Navigator.popUntil(
-                                      context, ModalRoute.withName('/root'));
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => RootPage()));
-                                }),
-                          ],
-                        );
-                      });
+                            content: Text(
+                              "정말 로그아웃 하시겠어요?",
+                              style: TextStyle(fontSize: 13, height: 1.3),
+                              textAlign: TextAlign.center,
+                            ),
+                            actions: <Widget>[
+                              new CupertinoDialogAction(
+                                  child: Text(
+                                    '아니오',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  onPressed: () async {
+                                    Navigator.pop(context);
+                                  }),
+                              new CupertinoDialogAction(
+                                  child: Text(
+                                    '예',
+                                    style: TextStyle(fontSize: 15),
+                                  ),
+                                  onPressed: () async {
+                                    await FirebaseAuth.instance.signOut();
+                                    Navigator.popUntil(
+                                        context, ModalRoute.withName('/root'));
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => RootPage()));
+                                  }),
+                            ],
+                          );
+                        });
+                  }
                 }),
           ),
 
@@ -172,9 +183,23 @@ class _BodyState extends State<Body> {
           Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (widget.user == null)
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) {
+                          return LoginAlert();
+                        });
+                  else {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ModifyScreen(widget.user)));
+                  }
+                },
                 child: Text(
-                  "회원 정보 변경",
+                  "계정 정보 관리",
                   style: TextStyle(color: kTextColor, fontSize: 16),
                 )),
           ),

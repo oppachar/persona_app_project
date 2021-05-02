@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persona/screens/signIn/sign_in_screen.dart';
 
 class LoginAlert extends StatelessWidget {
   @override
@@ -31,7 +32,7 @@ class LoginAlert extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => null(),
+                    builder: (context) => SignInScreen(),
                   ));
             }),
       ],

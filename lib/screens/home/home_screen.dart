@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
 import 'package:persona/screens/camera/camera_screen.dart';
 import 'package:persona/size_config.dart';
+import 'package:persona/widgets/alert.dart';
 import 'package:persona/widgets/cards/card.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -20,8 +21,21 @@ class HomeScreen extends StatelessWidget {
           children: [
             InkWellCard(
               circular: 30,
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CameraScreen(user))),
+              onTap: () {
+                if (user == null)
+                  showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (context) {
+                        return LoginAlert();
+                      });
+                else {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => CameraScreen(user)));
+                }
+              },
               child: Container(
                 width: 400,
                 height: 400,

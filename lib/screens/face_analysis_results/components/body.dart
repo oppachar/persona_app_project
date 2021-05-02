@@ -1,7 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
 import 'package:persona/size_config.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class Body extends StatelessWidget {
   final User user;
@@ -20,7 +22,20 @@ class Body extends StatelessWidget {
               style: kHeadlineTextStyle,
               textScaleFactor: 1,
             ),
-            VerticalSpacing(of: 150),
+            VerticalSpacing(of: 50),
+            StreamBuilder<DocumentSnapshot>(
+                stream: FirebaseFirestore.instance
+                    .collection("Photo")
+                    .doc(user.email)
+                    .snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) return CircularProgressIndicator();
+                  return CachedNetworkImage(
+                    imageUrl: snapshot.data['imageurl'],
+                    width: 300,
+                  );
+                }),
+            VerticalSpacing(of: 50),
             Text(
               "이런 헤어스타일을 추천해드려요 💇🏻‍♀️",
               style: kHeadlineTextStyle,
