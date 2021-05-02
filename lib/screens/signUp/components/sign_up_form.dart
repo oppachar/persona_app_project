@@ -366,12 +366,11 @@ class _SignUpFormState extends State<SignUpForm> {
                           user.updateProfile(
                               displayName: _name.text, photoURL: null);
                           FirebaseFirestore.instance
-                              .collection("user")
+                              .collection("User")
                               .doc(_email.text)
                               .set({
                             'name': _name.text,
                             'email': _email.text,
-                            'birth': _birth.text,
                             'phone': _phone.text,
                             'certificated': true,
                             'marketing_agreement': _value3

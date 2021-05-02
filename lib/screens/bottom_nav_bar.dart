@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:persona/screens/result/result_screen.dart';
+import 'package:persona/screens/root.dart';
 
 import '../size_config.dart';
 import '../constants.dart';
@@ -40,7 +41,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: buildAppBar(context),
+      appBar: _selectedIndex != 2 ? buildAppBar(context) : null,
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 4,
@@ -75,58 +76,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
       elevation: 2,
       title: Image.asset(
         "assets/icons/logo.png",
+        width: 100,
       ),
-      // actions: [
-      //   if (_selectedIndex == 2)
-      //     IconButton(
-      //         icon: SvgPicture.asset("assets/icons/signout.svg"),
-      //         color: kActiveColor,
-      //         onPressed: () {
-      //           showDialog(
-      //               context: context,
-      //               barrierDismissible: false,
-      //               builder: (context) {
-      //                 return CupertinoAlertDialog(
-      //                   title: Text(
-      //                     "로그아웃",
-      //                     style: TextStyle(
-      //                       fontWeight: FontWeight.bold,
-      //                       fontSize: 15,
-      //                     ),
-      //                   ),
-      //                   content: Text(
-      //                     "정말 로그아웃 하시겠어요?",
-      //                     style: TextStyle(fontSize: 13, height: 1.3),
-      //                     textAlign: TextAlign.center,
-      //                   ),
-      //                   actions: <Widget>[
-      //                     new CupertinoDialogAction(
-      //                         child: Text(
-      //                           '아니오',
-      //                           style: TextStyle(fontSize: 15),
-      //                         ),
-      //                         onPressed: () async {
-      //                           Navigator.pop(context);
-      //                         }),
-      //                     new CupertinoDialogAction(
-      //                         child: Text(
-      //                           '예',
-      //                           style: TextStyle(fontSize: 15),
-      //                         ),
-      //                         onPressed: () async {
-      //                           // await FirebaseAuth.instance.signOut();
-      //                           // Navigator.popUntil(
-      //                           //     context, ModalRoute.withName('/root'));
-      //                           // Navigator.push(
-      //                           //     context,
-      //                           //     MaterialPageRoute(
-      //                           //         builder: (context) => RootPage()));
-      //                         }),
-      //                   ],
-      //                 );
-      //               });
-      //         })
-      // ],
     );
   }
 
