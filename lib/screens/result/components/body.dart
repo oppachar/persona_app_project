@@ -28,7 +28,8 @@ class _BodyState extends State<Body> {
                 .doc(widget.user.email)
                 .snapshots(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) return CircularProgressIndicator();
+              if (!snapshot.hasData)
+                return Center(child: CircularProgressIndicator());
               if (!snapshot.data.exists)
                 return Center(
                   child: Text(

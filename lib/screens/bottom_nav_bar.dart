@@ -71,7 +71,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      elevation: 2,
+      elevation: 0,
       title: Image.asset(
         "assets/icons/logo.png",
         width: 100,

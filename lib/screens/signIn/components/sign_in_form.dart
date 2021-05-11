@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:persona/widgets/buttons/primary_button.dart';
 
 import '../../../constants.dart';
@@ -133,7 +132,6 @@ class _SignInFormState extends State<SignInForm> {
     ));
   }
 
-  // Example code of how to sign in with email and password.
   Future<User> _signInWithEmailAndPassword() async {
     try {
       final User user = (await _auth.signInWithEmailAndPassword(

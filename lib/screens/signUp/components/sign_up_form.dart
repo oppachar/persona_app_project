@@ -414,7 +414,6 @@ class _SignUpFormState extends State<SignUpForm> {
     ));
   }
 
-  // Example code for registration.
   Future<User> _register() async {
     try {
       final User user = (await _auth.createUserWithEmailAndPassword(
