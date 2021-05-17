@@ -8,6 +8,7 @@ import 'package:camera/camera.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'components/body.dart';
 import 'components/preview.dart';
 
 List<CameraDescription> cameras;
@@ -73,49 +74,51 @@ class _CameraScreenState extends State<CameraScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "촬영",
-          style: kHeadlineTextStyle,
-        ),
-        elevation: 0,
-        leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: kActiveColor,
-            ),
-            color: kActiveColor,
-            onPressed: () => Navigator.pop(context)),
-      ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: _cameraPreviewWidget(),
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 200,
-                width: double.infinity,
-                padding: EdgeInsets.all(15),
-                color: Colors.white,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: <Widget>[
-                    _cameraToggleRowWidget(),
-                    _cameraControlWidget(context),
-                    Spacer()
-                  ],
-                ),
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          title: Text(
+            "촬영",
+            style: kHeadlineTextStyle,
+          ),
+          elevation: 0,
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                color: kActiveColor,
               ),
-            )
-          ],
+              color: kActiveColor,
+              onPressed: () => Navigator.pop(context)),
         ),
-      ),
-    );
+        body: Body(widget.user));
+    //     body: Container(
+    //       child: Column(
+    //         crossAxisAlignment: CrossAxisAlignment.stretch,
+    //         children: <Widget>[
+    //           Expanded(
+    //             flex: 1,
+    //             child: _cameraPreviewWidget(),
+    //           ),
+    //           Align(
+    //             alignment: Alignment.bottomCenter,
+    //             child: Container(
+    //               height: 200,
+    //               width: double.infinity,
+    //               padding: EdgeInsets.all(15),
+    //               color: Colors.white,
+    //               child: Row(
+    //                 mainAxisAlignment: MainAxisAlignment.start,
+    //                 children: <Widget>[
+    //                   _cameraToggleRowWidget(),
+    //                   _cameraControlWidget(context),
+    //                   Spacer()
+    //                 ],
+    //               ),
+    //             ),
+    //           )
+    //         ],
+    //       ),
+    //     ),
+    //   );
   }
 
   /// Display Camera preview.

@@ -1,12 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
-import 'package:persona/face_detection/face_detection_screen.dart';
 import 'package:persona/screens/camera/camera_screen.dart';
-import 'package:persona/size_config.dart';
+import 'package:persona/screens/index.dart';
 import 'package:persona/widgets/alert.dart';
 import 'package:persona/widgets/cards/card.dart';
-import 'package:flutter_svg/svg.dart';
 
 class HomeScreen extends StatelessWidget {
   final User user;
@@ -34,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => FaceDetectionScreen(user)));
+                          builder: (context) => PostDetailPage()));
                 }
               },
               child: Container(

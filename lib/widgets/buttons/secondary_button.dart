@@ -18,7 +18,7 @@ class SecondaryButton extends StatelessWidget {
         EdgeInsets.symmetric(vertical: getProportionateScreenWidth(15));
     return SizedBox(
       width: double.infinity,
-      height: 30,
+      height: 45,
       child: Platform.isIOS
           ? CupertinoButton(
               padding: verticalPadding,

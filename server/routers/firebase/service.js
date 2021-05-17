@@ -7,14 +7,30 @@ const database = require('./config');
 
 // localhost:3000/firebase/save 호출
 router.get('/save', function(req, res){
-    database.ref('customer').set({name : "junseok"}, function(error) {
+ 
+    database.ref().child('User').set({name : "junseok"}, function(error) {
         if(error)
             console.error(error)
         else
             console.log("success save !!");
     });
+ 
     return res.json({firebase : true});
 });
+
+
+// router.get('/', function(req, res){
+//     database.ref().collection('User').doc('yeonns2@gmail.com').get().then((querySnapshot) => {
+//     let dailyActivities = [];
+//     querySnapshot.forEach((doc) => {
+//       dailyActivities.push(new Activity(doc.data()));
+//     });
+//     this.dailyActivities$.next(dailyActivities);
+//   }).catch((error) => {
+//     console.error(error);
+//   });
+//     return res.json(dailyActivities);
+// });
 
 
 module.exports = router;

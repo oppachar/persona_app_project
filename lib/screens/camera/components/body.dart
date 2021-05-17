@@ -95,7 +95,7 @@ class _BodyState extends State<Body> {
                           press: () {
                             _uploadFile(context).then((value) =>
                                 FirebaseFirestore.instance
-                                    .collection('Photo')
+                                    .collection('result')
                                     .doc(widget.user.email)
                                     .set({'imageurl': value}));
                             Navigator.push(
