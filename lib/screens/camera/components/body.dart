@@ -97,7 +97,13 @@ class _BodyState extends State<Body> {
                                 FirebaseFirestore.instance
                                     .collection('result')
                                     .doc(widget.user.email)
-                                    .set({'imageurl': value}));
+                                    .set({
+                                  'flag': 1,
+                                  'imageurl': value,
+                                  'faceline_index': 0,
+                                  'cheek_side': 1,
+                                  'ratio': 2
+                                }));
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

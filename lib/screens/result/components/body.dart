@@ -24,7 +24,7 @@ class _BodyState extends State<Body> {
           )
         : StreamBuilder<DocumentSnapshot>(
             stream: FirebaseFirestore.instance
-                .collection("Result")
+                .collection("result")
                 .doc(widget.user.email)
                 .snapshots(),
             builder: (context, snapshot) {
@@ -37,39 +37,7 @@ class _BodyState extends State<Body> {
                     style: kHeadlineTextStyle,
                   ),
                 );
-              return SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        InkWellCard(
-                            circular: 30,
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        FaceAnanlysisScreen(widget.user))),
-                            child: Container(
-                              width: 300,
-                              height: 200,
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "result1",
-                                    style: TextStyle(
-                                        color: kActiveColor, fontSize: 16),
-                                  )
-                                ],
-                              ),
-                            ))
-                      ],
-                    ),
-                  ),
-                ),
-              );
+              return FaceAnanlysisScreen(widget.user);
             });
   }
 }

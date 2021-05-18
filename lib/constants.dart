@@ -17,19 +17,22 @@ final TextStyle kHeadlineTextStyle = TextStyle(
 );
 
 final TextStyle kBodyTextStyle = TextStyle(
+  fontFamily: 'NotoSans',
   fontSize: 15,
   color: kTextColor,
   //height: 1.5,
 );
 
 final TextStyle kSecondaryTextStyle = TextStyle(
-  fontSize: 14,
+  fontFamily: 'NotoSans',
+  fontSize: 15,
   fontWeight: FontWeight.bold,
-  color: kActiveColor,
+  color: kTextColor,
   // height: 1.5,
 );
 
 final TextStyle kButtonTextStyle = TextStyle(
+  fontFamily: 'NotoSans',
   color: Colors.white,
   fontSize: 13,
   fontWeight: FontWeight.bold,
