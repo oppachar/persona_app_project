@@ -35,38 +35,156 @@ class Body extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "# 각진형",
-                            style: kSecondaryTextStyle,
-                          ),
+                          StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("faceline")
+                                  .doc(snapshot.data['faceline_index']
+                                      .toString())
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return CircularProgressIndicator();
+                                return Text(
+                                  "# " + snapshot.data['title'],
+                                  style: kSecondaryTextStyle,
+                                );
+                              }),
                           VerticalSpacing(),
-                          Text(
-                            "# 상안부가 긴 편",
-                            style: kSecondaryTextStyle,
-                          ),
+                          StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("ratio")
+                                  .doc(snapshot.data['ratio'].toString())
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return CircularProgressIndicator();
+                                return Text(
+                                  "# " + snapshot.data['title'],
+                                  style: kSecondaryTextStyle,
+                                );
+                              }),
                           VerticalSpacing(),
-                          Text(
-                            "# 눈 세로 길이 평균",
-                            style: kSecondaryTextStyle,
-                          ),
+                          StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("cheek_side")
+                                  .doc(snapshot.data['cheek_side'].toString())
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return CircularProgressIndicator();
+                                return Text(
+                                  "# " + snapshot.data['title'],
+                                  style: kSecondaryTextStyle,
+                                );
+                              }),
                           VerticalSpacing(),
-                          Text(
-                            "# 눈 가로 길이 평균보다 4.0% 긴 편",
-                            style: kSecondaryTextStyle,
-                          ),
+                          StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("cheek_front")
+                                  .doc(snapshot.data['cheek_front'].toString())
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return CircularProgressIndicator();
+                                return Text(
+                                  "# " + snapshot.data['title'],
+                                  style: kSecondaryTextStyle,
+                                );
+                              }),
                           VerticalSpacing(),
-                          Text(
-                            "# 콧볼 평균보다 1.3% 작은 편",
-                            style: kSecondaryTextStyle,
-                          )
+                          StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("eyeh")
+                                  .doc(snapshot.data['eyeh_result'].toString())
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return CircularProgressIndicator();
+                                return Text(
+                                  "# " + snapshot.data['title'],
+                                  style: kSecondaryTextStyle,
+                                );
+                              }),
+                          VerticalSpacing(),
+                          StreamBuilder<DocumentSnapshot>(
+                              stream: FirebaseFirestore.instance
+                                  .collection("eyew")
+                                  .doc(snapshot.data['eyew_result'].toString())
+                                  .snapshots(),
+                              builder: (context, snapshot) {
+                                if (!snapshot.hasData)
+                                  return CircularProgressIndicator();
+                                return Text(
+                                  "# " + snapshot.data['title'],
+                                  style: kSecondaryTextStyle,
+                                );
+                              }),
+                          VerticalSpacing(),
+                          if (snapshot.data['nose_result'] == 1)
+                            StreamBuilder<DocumentSnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection("nose")
+                                    .doc(
+                                        snapshot.data['nose_result'].toString())
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData)
+                                    return CircularProgressIndicator();
+                                  return Text(
+                                    "# " + snapshot.data['title'],
+                                    style: kSecondaryTextStyle,
+                                  );
+                                }),
+                          VerticalSpacing(),
                         ]),
-                    VerticalSpacing(of: 50),
+                    VerticalSpacing(of: 30),
                     Text(
                       "이런 헤어스타일을 추천해드려요 💇🏻‍♀️",
                       style: kHeadlineTextStyle,
                       textScaleFactor: 1,
                     ),
                     VerticalSpacing(of: 10),
+                    StreamBuilder<DocumentSnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("faceline")
+                            .doc(snapshot.data['faceline_index'].toString())
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData)
+                            return CircularProgressIndicator();
+                          return InkWellCard(
+                            onTap: () {},
+                            circular: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    snapshot.data['title'] + "에게 추천해요!",
+                                    style: kHeadlineTextStyle,
+                                  ),
+                                  VerticalSpacing(of: 20),
+                                  Text(
+                                    "Best : " + snapshot.data['best'],
+                                    style: kBodyTextStyle,
+                                  ),
+                                  VerticalSpacing(),
+                                  Text(
+                                    "Worst : " + snapshot.data['worst'],
+                                    style: kBodyTextStyle,
+                                  ),
+                                  VerticalSpacing(),
+                                  Text(
+                                    "Comment : " + snapshot.data['comment'],
+                                    style: kBodyTextStyle,
+                                  ),
+                                  VerticalSpacing(),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                    VerticalSpacing(),
                     StreamBuilder<DocumentSnapshot>(
                         stream: FirebaseFirestore.instance
                             .collection("ratio")
@@ -131,8 +249,8 @@ class Body extends StatelessWidget {
                     VerticalSpacing(of: 10),
                     StreamBuilder<DocumentSnapshot>(
                         stream: FirebaseFirestore.instance
-                            .collection("faceline")
-                            .doc(snapshot.data['faceline_index'].toString())
+                            .collection("cheek_front")
+                            .doc(snapshot.data['cheek_front'].toString())
                             .snapshots(),
                         builder: (context, snapshot) {
                           if (!snapshot.hasData)
@@ -145,20 +263,10 @@ class Body extends StatelessWidget {
                               child: Column(
                                 children: [
                                   Text(
-                                    snapshot.data['title'] + "에게 추천해요!",
+                                    snapshot.data['title'] + " 추천해요!",
                                     style: kHeadlineTextStyle,
                                   ),
                                   VerticalSpacing(of: 20),
-                                  Text(
-                                    "Best : " + snapshot.data['best'],
-                                    style: kBodyTextStyle,
-                                  ),
-                                  VerticalSpacing(),
-                                  Text(
-                                    "Worst : " + snapshot.data['worst'],
-                                    style: kBodyTextStyle,
-                                  ),
-                                  VerticalSpacing(),
                                   Text(
                                     "Comment : " + snapshot.data['comment'],
                                     style: kBodyTextStyle,
@@ -169,13 +277,116 @@ class Body extends StatelessWidget {
                             ),
                           );
                         }),
+                    VerticalSpacing(of: 10),
                     VerticalSpacing(of: 30),
                     Text(
                       "이런 메이크업을 추천해드려요 💄",
                       style: kHeadlineTextStyle,
                       textScaleFactor: 1,
                     ),
-                    VerticalSpacing(of: 150),
+                    VerticalSpacing(of: 10),
+                    StreamBuilder<DocumentSnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("eyeh")
+                            .doc(snapshot.data['eyeh_result'].toString())
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData)
+                            return CircularProgressIndicator();
+                          return InkWellCard(
+                            onTap: () {},
+                            circular: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    snapshot.data['title'] + " 추천해요!",
+                                    style: kHeadlineTextStyle,
+                                  ),
+                                  VerticalSpacing(of: 20),
+                                  Text(
+                                    "Comment : " + snapshot.data['comment'],
+                                    style: kBodyTextStyle,
+                                  ),
+                                  VerticalSpacing(),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                    VerticalSpacing(of: 10),
+                    StreamBuilder<DocumentSnapshot>(
+                        stream: FirebaseFirestore.instance
+                            .collection("eyew")
+                            .doc(snapshot.data['eyew_result'].toString())
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData)
+                            return CircularProgressIndicator();
+                          return InkWellCard(
+                            onTap: () {},
+                            circular: 10,
+                            child: Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                children: [
+                                  Text(
+                                    snapshot.data['title'] + " 추천해요!",
+                                    style: kHeadlineTextStyle,
+                                  ),
+                                  VerticalSpacing(of: 20),
+                                  Text(
+                                    "Comment : " + snapshot.data['comment'],
+                                    style: kBodyTextStyle,
+                                  ),
+                                  VerticalSpacing(),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                    VerticalSpacing(of: 10),
+                    if (snapshot.data['nose_result'] == 1)
+                      StreamBuilder<DocumentSnapshot>(
+                          stream: FirebaseFirestore.instance
+                              .collection("nose")
+                              .doc(snapshot.data['nose_result'].toString())
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (!snapshot.hasData)
+                              return CircularProgressIndicator();
+                            return InkWellCard(
+                              onTap: () {},
+                              circular: 10,
+                              child: Padding(
+                                padding: const EdgeInsets.all(30.0),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      snapshot.data['title'] + " 추천해요!",
+                                      style: kHeadlineTextStyle,
+                                    ),
+                                    VerticalSpacing(of: 20),
+                                    Text(
+                                      "Comment : " + snapshot.data['comment'],
+                                      style: kBodyTextStyle,
+                                    ),
+                                    VerticalSpacing(),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }),
+                    VerticalSpacing(of: 30),
+                    Center(
+                      child: Text(
+                        "오랫동안 나를 봐왔던 나에게 신경 쓰이는 \n특징들만 커버해도 충분히 큰 변화가 될 거에요 😁 \n스타일링에는 법칙은 있지만 정답은 없습니다!",
+                        style: kHeadlineTextStyle,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    VerticalSpacing(of: 30),
                   ],
                 );
               }),

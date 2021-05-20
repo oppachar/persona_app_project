@@ -5,7 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:persona/screens/side_camera/side_camera_screen.dart';
+import 'package:persona/screens/loading/loading_screen.dart';
 
 import 'package:persona/widgets/buttons/primary_button.dart';
 import 'package:persona/widgets/buttons/secondary_button.dart';
@@ -98,15 +98,16 @@ class _BodyState extends State<Body> {
                                 FirebaseFirestore.instance
                                     .collection('result')
                                     .doc(widget.user.email)
-                                    .set({
-                                  'imageurl_front': value,
+                                    .update({
+                                  'flag': 1,
+                                  'imageurl_side': value,
                                 }));
 
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>
-                                        SideCameraScreen(widget.user)));
+                                        LoadingScreen(widget.user)));
                           }),
                     ),
                   ],
