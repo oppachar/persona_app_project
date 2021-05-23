@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
 import 'package:persona/screens/face_analysis_results/face_analysis_results_screen.dart';
-import 'package:persona/widgets/cards/card.dart';
 
 class Body extends StatefulWidget {
   final User user;

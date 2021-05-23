@@ -1,26 +1,23 @@
+import 'package:camera/camera.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:persona/constants.dart';
-import 'package:persona/size_config.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:camera/camera.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:persona/screens/camera_side/components/preview.dart';
 
-import 'components/body.dart';
-import 'components/preview.dart';
+import '../../../constants.dart';
+import '../../../size_config.dart';
 
-List<CameraDescription> cameras;
-
-class SideCameraScreen extends StatefulWidget {
+class Body extends StatefulWidget {
   final User user;
-  SideCameraScreen(this.user);
+  Body(this.user);
   @override
-  _SideCameraScreenState createState() => _SideCameraScreenState();
+  _BodyState createState() => _BodyState();
 }
 
-class _SideCameraScreenState extends State<SideCameraScreen> {
+class _BodyState extends State<Body> {
   CameraController controller;
   List cameras;
   int selectedCameraIndex;
@@ -34,7 +31,7 @@ class _SideCameraScreenState extends State<SideCameraScreen> {
 
       if (cameras.length > 0) {
         setState(() {
-          selectedCameraIndex = 0;
+          selectedCameraIndex = 1;
         });
         _initCameraController(cameras[selectedCameraIndex]).then((void v) {});
       } else {
@@ -73,52 +70,34 @@ class _SideCameraScreenState extends State<SideCameraScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            "촬영",
-            style: kHeadlineTextStyle,
+    return Container(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          Expanded(
+            flex: 1,
+            child: _cameraPreviewWidget(),
           ),
-          elevation: 0,
-          leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios,
-                color: kActiveColor,
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 200,
+              width: double.infinity,
+              padding: EdgeInsets.all(15),
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  _cameraToggleRowWidget(),
+                  _cameraControlWidget(context),
+                  Spacer()
+                ],
               ),
-              color: kActiveColor,
-              onPressed: () => Navigator.pop(context)),
-        ),
-        body: Body(widget.user));
-    //     body: Container(
-    //       child: Column(
-    //         crossAxisAlignment: CrossAxisAlignment.stretch,
-    //         children: <Widget>[
-    //           Expanded(
-    //             flex: 1,
-    //             child: _cameraPreviewWidget(),
-    //           ),
-    //           Align(
-    //             alignment: Alignment.bottomCenter,
-    //             child: Container(
-    //               height: 200,
-    //               width: double.infinity,
-    //               padding: EdgeInsets.all(15),
-    //               color: Colors.white,
-    //               child: Row(
-    //                 mainAxisAlignment: MainAxisAlignment.start,
-    //                 children: <Widget>[
-    //                   _cameraToggleRowWidget(),
-    //                   _cameraControlWidget(context),
-    //                   Spacer()
-    //                 ],
-    //               ),
-    //             ),
-    //           )
-    //         ],
-    //       ),
-    //     ),
-    //   );
+            ),
+          )
+        ],
+      ),
+    );
   }
 
   /// Display Camera preview.
@@ -171,31 +150,35 @@ class _SideCameraScreenState extends State<SideCameraScreen> {
             2;
       }
       return Stack(fit: StackFit.expand, children: [
-        Align(
-            alignment: Alignment.centerLeft,
-            child: Container(width: horizontalPadding, color: color)),
-        Align(
-            alignment: Alignment.centerRight,
-            child: Container(width: horizontalPadding, color: color)),
-        Align(
-            alignment: Alignment.topCenter,
-            child: Container(
-                margin: EdgeInsets.only(
-                    left: horizontalPadding, right: horizontalPadding),
-                height: verticalPadding,
-                color: color)),
-        Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-                margin: EdgeInsets.only(
-                    left: horizontalPadding, right: horizontalPadding),
-                height: verticalPadding,
-                color: color)),
-        Container(
-          margin: EdgeInsets.symmetric(
-              horizontal: horizontalPadding, vertical: verticalPadding),
-          decoration: BoxDecoration(border: Border.all(color: kActiveColor)),
-        )
+        Image.asset(
+          "assets/images/faceline_side.png",
+          fit: BoxFit.fitWidth,
+        ),
+        // Align(
+        //     alignment: Alignment.centerLeft,
+        //     child: Container(width: horizontalPadding, color: color)),
+        // Align(
+        //     alignment: Alignment.centerRight,
+        //     child: Container(width: horizontalPadding, color: color)),
+        // Align(
+        //     alignment: Alignment.topCenter,
+        //     child: Container(
+        //         margin: EdgeInsets.only(
+        //             left: horizontalPadding, right: horizontalPadding),
+        //         height: verticalPadding,
+        //         color: color)),
+        // Align(
+        //     alignment: Alignment.bottomCenter,
+        //     child: Container(
+        //         margin: EdgeInsets.only(
+        //             left: horizontalPadding, right: horizontalPadding),
+        //         height: verticalPadding,
+        //         color: color)),
+        // Container(
+        //   margin: EdgeInsets.symmetric(
+        //       horizontal: horizontalPadding, vertical: verticalPadding),
+        //   decoration: BoxDecoration(border: Border.all(color: kActiveColor)),
+        // )
       ]);
     });
   }
@@ -213,7 +196,12 @@ class _SideCameraScreenState extends State<SideCameraScreen> {
               children: [
                 Column(
                   children: [
-                    Icon(Icons.circle, color: kActiveColor),
+                    SvgPicture.asset(
+                      "assets/icons/camera.svg",
+                      width: 21,
+                      height: 21,
+                    ),
+                    VerticalSpacing(of: 2),
                     Text(
                       "Front",
                       style: kBodyTextStyle,
@@ -223,12 +211,7 @@ class _SideCameraScreenState extends State<SideCameraScreen> {
                 HorizontalSpacing(),
                 Column(
                   children: [
-                    SvgPicture.asset(
-                      "assets/icons/camera.svg",
-                      width: 21,
-                      height: 21,
-                    ),
-                    VerticalSpacing(of: 2),
+                    Icon(Icons.circle, color: kActiveColor),
                     Text(
                       "Side",
                       style: kBodyTextStyle,
@@ -303,13 +286,14 @@ class _SideCameraScreenState extends State<SideCameraScreen> {
     try {
       final path =
           join((await getTemporaryDirectory()).path, '${DateTime.now()}.png');
-      await controller.takePicture();
+      await controller.takePicture(path);
 
       Navigator.push(
         context,
         MaterialPageRoute(
             builder: (context) => PreviewScreen(
                   imgPath: path,
+                  user: widget.user,
                 )),
       );
     } catch (e) {

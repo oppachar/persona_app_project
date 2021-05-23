@@ -36,11 +36,12 @@ dependencies:
   firebase_storage: ^5.0.0 
   image_picker: ^0.6.7+22
   cached_network_image: ^2.5.0
-  camera: ^0.7.0
+  camera: ^0.5.8+17
   path: ^1.8.0
   path_provider: ^1.1.0
   http: ^0.12.2
   dio: ^3.0.0
+ 
 
 
 dev_dependencies:
