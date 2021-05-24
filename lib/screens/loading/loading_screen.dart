@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
 import 'package:persona/screens/face_analysis_results/face_analysis_results_screen.dart';
-import 'package:persona/screens/result/result_screen.dart';
 
 class LoadingScreen extends StatelessWidget {
   final User user;

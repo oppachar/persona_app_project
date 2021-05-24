@@ -27,7 +27,7 @@ class _CameraScreenState extends State<CameraScreen> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           title: Text(
-            "촬영",
+            "정면 촬영",
             style: kHeadlineTextStyle,
           ),
           elevation: 0,

@@ -20,12 +20,13 @@ final TextStyle kBodyTextStyle = TextStyle(
   fontFamily: 'NotoSans',
   fontSize: 15,
   color: kTextColor,
-  //height: 1.5,
+  fontWeight: FontWeight.w500,
+  height: 1.5,
 );
 
 final TextStyle kSecondaryTextStyle = TextStyle(
   fontFamily: 'NotoSans',
-  fontSize: 15,
+  fontSize: 17,
   fontWeight: FontWeight.bold,
   color: kTextColor,
   // height: 1.5,

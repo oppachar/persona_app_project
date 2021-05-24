@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
-import 'package:persona/screens/camera_front/camera_screen.dart';
+import 'package:persona/screens/precautions/precautions_screen.dart';
 
 import 'package:persona/widgets/alert.dart';
 import 'package:persona/widgets/cards/card.dart';
@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => CameraScreen(user)));
+                          builder: (context) => PrecautionsScreen(user)));
                 }
               },
               child: Container(

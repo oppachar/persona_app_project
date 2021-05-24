@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:persona/screens/face_analysis_results/face_analysis_results_screen.dart';
+import 'package:persona/screens/loading/loading_screen.dart';
 import 'package:persona/widgets/buttons/primary_button.dart';
 import 'package:persona/widgets/buttons/secondary_button.dart';
 import '../../../size_config.dart';
@@ -21,7 +21,6 @@ class PreviewScreen extends StatefulWidget {
 class _PreviewScreenState extends State<PreviewScreen> {
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
   }
 
@@ -49,7 +48,8 @@ class _PreviewScreenState extends State<PreviewScreen> {
             children: [
               SizedBox(
                 width: 150,
-                child: SecondaryButton(text: "다른 사진으로 할래요", press: () {}),
+                child: SecondaryButton(
+                    text: "다른 사진으로 할래요", press: () => Navigator.pop(context)),
               ),
               HorizontalSpacing(),
               SizedBox(
@@ -58,18 +58,16 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     text: "이 사진으로 분석하기",
                     press: () {
                       _uploadFile(context).then((value) => FirebaseFirestore
-                              .instance
-                              .collection('result')
-                              .doc(widget.user.email)
-                              .set({
-                            'imageurl_front': value,
-                          }));
+                          .instance
+                          .collection('result')
+                          .doc(widget.user.email)
+                          .update({'imageurl_side': value, 'flag': 1}));
 
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  FaceAnanlysisScreen(widget.user)));
+                                  LoadingScreen(widget.user)));
                     }),
               ),
             ],
