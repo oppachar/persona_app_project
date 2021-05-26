@@ -62,12 +62,16 @@ class _PreviewScreenState extends State<PreviewScreen> {
                     text: "이 사진으로 분석하기",
                     press: () {
                       _uploadFile(context).then((value) => FirebaseFirestore
-                              .instance
-                              .collection('result')
-                              .doc(widget.user.email)
-                              .set({
-                            'imageurl_front': value,
-                          }));
+                          .instance
+                          .collection('result')
+                          .doc(widget.user.email)
+                          .set({'imageurl_front': value, 'flag_front': 1}));
+
+                      // _geturl(context).then((value) => FirebaseFirestore
+                      //     .instance
+                      //     .collection("result")
+                      //     .doc(widget.user.email)
+                      //     .update({'landmark_front': value}));
 
                       Navigator.push(
                           context,
@@ -89,6 +93,15 @@ class _PreviewScreenState extends State<PreviewScreen> {
     // 파일 업로드
     await reference.putFile(File(widget.imgPath));
     // 파일 url 반환
+    return await reference.getDownloadURL();
+  }
+
+  Future<String> _geturl(BuildContext context) async {
+    final reference = FirebaseStorage.instance
+        .ref()
+        .child('front_result/')
+        .child('front_result.png');
+
     return await reference.getDownloadURL();
   }
 }

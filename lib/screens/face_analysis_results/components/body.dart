@@ -1,15 +1,53 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:persona/constants.dart';
 import 'package:persona/screens/face_analysis_results/components/hair.dart';
 import 'package:persona/screens/face_analysis_results/components/makeup.dart';
 import 'package:persona/size_config.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
   final User user;
   Body(this.user);
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
+  Future<String> _getfronturl() async {
+    final reference = FirebaseStorage.instance
+        .ref()
+        .child('front_result/')
+        .child('front_result.png');
+
+    return await reference.getDownloadURL();
+  }
+
+  Future<String> _getsideurl() async {
+    final reference = FirebaseStorage.instance
+        .ref()
+        .child('side_result/')
+        .child('side_result.png');
+
+    return await reference.getDownloadURL();
+  }
+
+  @override
+  void initState() {
+    _getfronturl().then((value) => FirebaseFirestore.instance
+        .collection("result")
+        .doc(widget.user.email)
+        .update({'landmark_front': value}));
+    _getsideurl().then((value) => FirebaseFirestore.instance
+        .collection("result")
+        .doc(widget.user.email)
+        .update({'landmark_side': value}));
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,7 +57,7 @@ class Body extends StatelessWidget {
           child: StreamBuilder<DocumentSnapshot>(
               stream: FirebaseFirestore.instance
                   .collection("result")
-                  .doc(user.email)
+                  .doc(widget.user.email)
                   .snapshots(),
               builder: (context, snapshot) {
                 DocumentSnapshot data = snapshot.data;
@@ -29,7 +67,7 @@ class Body extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        user.displayName + "님의 얼굴분석 👩🏻",
+                        widget.user.displayName + "님의 얼굴분석 👩🏻",
                         style: kHeadlineTextStyle,
                         textScaleFactor: 1,
                       ),
@@ -38,14 +76,39 @@ class Body extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // CachedNetworkImage(
-                            //   imageUrl: data['test'],
-                            //   placeholder: (context, url) =>
-                            //       CircularProgressIndicator(),
-                            //   errorWidget: (context, url, error) =>
-                            //       Icon(Icons.error),
-                            // ),
-                            // VerticalSpacing(),
+                            Center(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    child: CachedNetworkImage(
+                                      imageUrl: data['landmark_front'],
+                                      fit: BoxFit.fitWidth,
+                                      placeholder: (context, url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
+                                    ),
+                                  ),
+                                  HorizontalSpacing(),
+                                  Container(
+                                    width: 150,
+                                    height: 200,
+                                    child: CachedNetworkImage(
+                                      imageUrl: data['landmark_side'],
+                                      fit: BoxFit.fitWidth,
+                                      placeholder: (context, url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Icon(Icons.error),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            VerticalSpacing(),
                             StreamBuilder<DocumentSnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection("faceline")
@@ -221,12 +284,6 @@ class Body extends StatelessWidget {
                         ),
                       ),
                       VerticalSpacing(of: 30),
-                      // PrimaryButton(
-                      //     text: "홈으로 돌아가기",
-                      //     press: () => Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(
-                      //             builder: (context) => HomeScreen(user))))
                     ]);
               }),
         ),

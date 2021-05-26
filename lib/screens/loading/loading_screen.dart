@@ -9,7 +9,7 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.delayed(Duration(milliseconds: 3000)),
+        future: Future.delayed(Duration(milliseconds: 10000)),
         builder: (context, snapshot) {
 // Checks whether the future is resolved, ie the duration is over
           if (snapshot.connectionState == ConnectionState.done)

@@ -33,7 +33,7 @@ class PrecautionsScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                VerticalSpacing(of: 250),
+                VerticalSpacing(of: 200),
                 Text(
                   "촬영 전 주의사항 📸",
                   textAlign: TextAlign.center,
@@ -45,8 +45,9 @@ class PrecautionsScreen extends StatelessWidget {
                 ),
                 Text(
                   '''
+
       ✔️ 페이스라인에 맞춰서 촬영해주세요
-      ✔️ 앞머리, 마스크, 안경 등 얼굴을 가리는 악세서리는 말아주세요
+      ✔️ 앞머리, 마스크 등 얼굴을 가리지 말아주세요
       ✔️ 어두운 곳에서 촬영을 피해주세요
       
 ''',
@@ -55,9 +56,6 @@ class PrecautionsScreen extends StatelessWidget {
                       fontSize: 17,
                       height: 2.0,
                       fontWeight: FontWeight.w600),
-                ),
-                VerticalSpacing(
-                  of: 30,
                 ),
                 SizedBox(
                     width: 200,

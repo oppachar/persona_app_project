@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="375" height="812" viewBox="0 0 375 812">
+  <defs>
+    <style>
+      .cls-1 {
+        clip-path: url(#clip-Intro);
+      }
+
+      .cls-2, .cls-3 {
+        fill: #9297ff;
+      }
+
+      .cls-2 {
+        font-size: 57px;
+        font-family: Josefin Sans;
+        font-weight: 300;
+        font-style: italic;
+      }
+
+      .cls-3 {
+        font-size: 15px;
+        font-family: NotoSansCJKkr-Medium, Noto Sans CJK KR;
+        font-weight: 500;
+      }
+
+      .cls-4 {
+        fill: #fff;
+      }
+    </style>
+    <clipPath id="clip-Intro">
+      <rect width="375" height="812"/>
+    </clipPath>
+  </defs>
+  <g id="Intro" class="cls-1">
+    <rect class="cls-4" width="375" height="812"/>
+    <text id="persona" class="cls-2" transform="translate(89 404)"><tspan x="0" y="0">persona</tspan></text>
+    <text id="당신을_위한_AI_퍼스널_컨설팅" data-name="당신을 위한 AI 퍼스널 컨설팅" class="cls-3" transform="translate(98 357)"><tspan x="0" y="0">당신을 위한 </tspan><tspan y="0">AI </tspan><tspan y="0">퍼스널 컨설팅</tspan></text>
+  </g>
+</svg>
