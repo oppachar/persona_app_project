@@ -19,7 +19,7 @@ class _BodyState extends State<Body> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               VerticalSpacing(
-                of: 10,
+                of: 20,
               ),
               Text(
                 "회원가입",

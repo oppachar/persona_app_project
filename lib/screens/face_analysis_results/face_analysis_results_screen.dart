@@ -10,6 +10,7 @@ class FaceAnanlysisScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       //appBar: buildAppBar(context),
       body: Body(user),
     );

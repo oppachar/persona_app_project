@@ -41,6 +41,7 @@ class _BodyState extends State<Body> {
         .collection("result")
         .doc(widget.user.email)
         .update({'landmark_front': value}));
+
     _getsideurl().then((value) => FirebaseFirestore.instance
         .collection("result")
         .doc(widget.user.email)
@@ -81,26 +82,30 @@ class _BodyState extends State<Body> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Container(
-                                    width: 150,
+                                    width: 165,
                                     height: 200,
                                     child: CachedNetworkImage(
                                       imageUrl: data['landmark_front'],
                                       fit: BoxFit.fitWidth,
-                                      placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
+                                      placeholder: (context, url) => Container(
+                                          width: 30,
+                                          height: 30,
+                                          child: CircularProgressIndicator()),
                                       errorWidget: (context, url, error) =>
                                           Icon(Icons.error),
                                     ),
                                   ),
-                                  HorizontalSpacing(),
+                                  HorizontalSpacing(of: 5),
                                   Container(
-                                    width: 150,
+                                    width: 165,
                                     height: 200,
                                     child: CachedNetworkImage(
                                       imageUrl: data['landmark_side'],
                                       fit: BoxFit.fitWidth,
-                                      placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
+                                      placeholder: (context, url) => Container(
+                                          width: 30,
+                                          height: 30,
+                                          child: CircularProgressIndicator()),
                                       errorWidget: (context, url, error) =>
                                           Icon(Icons.error),
                                     ),
@@ -108,7 +113,7 @@ class _BodyState extends State<Body> {
                                 ],
                               ),
                             ),
-                            VerticalSpacing(),
+                            VerticalSpacing(of: 20),
                             StreamBuilder<DocumentSnapshot>(
                                 stream: FirebaseFirestore.instance
                                     .collection("faceline")
@@ -230,16 +235,20 @@ class _BodyState extends State<Body> {
                                   builder: (context, snapshot) {
                                     if (!snapshot.hasData)
                                       return CircularProgressIndicator();
-                                    return Text(
-                                      "# " +
-                                          snapshot.data['title'] +
-                                          " (" +
-                                          data['nose_percent'].toString() +
-                                          "%)",
-                                      style: kSecondaryTextStyle,
+                                    return Column(
+                                      children: [
+                                        Text(
+                                          "# " +
+                                              snapshot.data['title'] +
+                                              " (" +
+                                              data['nose_percent'].toString() +
+                                              "%)",
+                                          style: kSecondaryTextStyle,
+                                        ),
+                                        VerticalSpacing(),
+                                      ],
                                     );
                                   }),
-                            VerticalSpacing(),
                             if (snapshot.data['between_result'] != 0)
                               StreamBuilder<DocumentSnapshot>(
                                   stream: FirebaseFirestore.instance
@@ -250,12 +259,21 @@ class _BodyState extends State<Body> {
                                   builder: (context, snapshot) {
                                     if (!snapshot.hasData)
                                       return CircularProgressIndicator();
-                                    return Text(
-                                      "# " + snapshot.data['title'],
-                                      style: kSecondaryTextStyle,
+                                    return Column(
+                                      children: [
+                                        Text(
+                                          "# " +
+                                              snapshot.data['title'] +
+                                              " (" +
+                                              data['between_percent']
+                                                  .toString() +
+                                              "%)",
+                                          style: kSecondaryTextStyle,
+                                        ),
+                                        VerticalSpacing(),
+                                      ],
                                     );
                                   }),
-                            VerticalSpacing(),
                             if (snapshot.data['shorteye_index'] == 1)
                               StreamBuilder<DocumentSnapshot>(
                                   stream: FirebaseFirestore.instance
@@ -266,12 +284,30 @@ class _BodyState extends State<Body> {
                                   builder: (context, snapshot) {
                                     if (!snapshot.hasData)
                                       return CircularProgressIndicator();
-                                    return Text(
-                                      "# " + snapshot.data['title'],
-                                      style: kSecondaryTextStyle,
+                                    return Column(
+                                      children: [
+                                        Text(
+                                          "# " + snapshot.data['title'],
+                                          style: kSecondaryTextStyle,
+                                        ),
+                                        VerticalSpacing(),
+                                      ],
                                     );
                                   }),
-                            VerticalSpacing(),
+                            StreamBuilder<DocumentSnapshot>(
+                                stream: FirebaseFirestore.instance
+                                    .collection("lips")
+                                    .doc(
+                                        snapshot.data['lips_result'].toString())
+                                    .snapshots(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData)
+                                    return CircularProgressIndicator();
+                                  return Text(
+                                    "# " + snapshot.data['title'],
+                                    style: kSecondaryTextStyle,
+                                  );
+                                }),
                           ]),
                       VerticalSpacing(of: 30),
                       HairStyle(snapshot.data),

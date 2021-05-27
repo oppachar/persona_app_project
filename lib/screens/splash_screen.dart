@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:persona/screens/root.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: SvgPicture.asset(
-        'assets/images/Intro.svg',
+      child: Image.asset(
+        'assets/images/Intro.png',
         fit: BoxFit.fitWidth,
       ),
     );

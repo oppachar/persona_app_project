@@ -35,13 +35,14 @@ class _PreviewScreenState extends State<PreviewScreen> {
           ),
           Container(
             width: 300,
+            height: 400,
             child: Image.file(
               File(widget.imgPath),
               fit: BoxFit.cover,
             ),
           ),
           VerticalSpacing(
-            of: 30,
+            of: 50,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -67,12 +68,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
                           .doc(widget.user.email)
                           .set({'imageurl_front': value, 'flag_front': 1}));
 
-                      // _geturl(context).then((value) => FirebaseFirestore
-                      //     .instance
-                      //     .collection("result")
-                      //     .doc(widget.user.email)
-                      //     .update({'landmark_front': value}));
-
                       Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -93,15 +88,6 @@ class _PreviewScreenState extends State<PreviewScreen> {
     // 파일 업로드
     await reference.putFile(File(widget.imgPath));
     // 파일 url 반환
-    return await reference.getDownloadURL();
-  }
-
-  Future<String> _geturl(BuildContext context) async {
-    final reference = FirebaseStorage.instance
-        .ref()
-        .child('front_result/')
-        .child('front_result.png');
-
     return await reference.getDownloadURL();
   }
 }

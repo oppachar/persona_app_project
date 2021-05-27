@@ -45,7 +45,7 @@ class _SignUpFormState extends State<SignUpForm> {
               borderRadius: new BorderRadius.circular(10.0),
             ),
             child: TextFormField(
-              style: TextStyle(fontSize: 15),
+              style: kBodyTextStyle,
               keyboardType: TextInputType.name,
               autofocus: false,
               cursorColor: kActiveColor,
@@ -77,7 +77,7 @@ class _SignUpFormState extends State<SignUpForm> {
               borderRadius: new BorderRadius.circular(10.0),
             ),
             child: TextFormField(
-              style: TextStyle(fontSize: 15),
+              style: kBodyTextStyle,
               keyboardType: TextInputType.emailAddress,
               cursorColor: kActiveColor,
               controller: _email,
@@ -108,7 +108,7 @@ class _SignUpFormState extends State<SignUpForm> {
               borderRadius: new BorderRadius.circular(10.0),
             ),
             child: TextFormField(
-              style: TextStyle(fontSize: 15),
+              style: kBodyTextStyle,
               cursorColor: kActiveColor,
               controller: _password,
               decoration: InputDecoration(
@@ -147,7 +147,7 @@ class _SignUpFormState extends State<SignUpForm> {
               borderRadius: new BorderRadius.circular(10.0),
             ),
             child: TextFormField(
-              style: TextStyle(fontSize: 15),
+              style: kBodyTextStyle,
               cursorColor: kActiveColor,
               controller: _confirm,
               decoration: InputDecoration(
@@ -174,42 +174,42 @@ class _SignUpFormState extends State<SignUpForm> {
           ),
           VerticalSpacing(of: 20),
 
-          Text(
-            " 핸드폰 번호",
-            textScaleFactor: 1,
-            style: TextStyle(
-                fontSize: 13, fontWeight: FontWeight.bold, color: kTextColor),
-          ),
-          VerticalSpacing(),
-          Container(
-            decoration: BoxDecoration(
-              color: Colors.grey[200],
-              borderRadius: new BorderRadius.circular(10.0),
-            ),
-            child: TextFormField(
-              controller: _phone,
-              style: TextStyle(fontSize: 15),
-              cursorColor: kActiveColor,
-              decoration: InputDecoration(
-                hintText: "숫자만 입력해주세요",
-                hintStyle: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.grey[500]),
-                fillColor: Colors.grey[100],
-                contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-                border: InputBorder.none,
-              ),
-              validator: (String value) {
-                if (value.isEmpty) {
-                  return '핸드폰 번호를 입력해주세요';
-                }
-                return null;
-              },
-            ),
-          ),
+          // Text(
+          //   " 핸드폰 번호",
+          //   textScaleFactor: 1,
+          //   style: TextStyle(
+          //       fontSize: 13, fontWeight: FontWeight.bold, color: kTextColor),
+          // ),
+          // VerticalSpacing(),
+          // Container(
+          //   decoration: BoxDecoration(
+          //     color: Colors.grey[200],
+          //     borderRadius: new BorderRadius.circular(10.0),
+          //   ),
+          //   child: TextFormField(
+          //     controller: _phone,
+          //     style: TextStyle(fontSize: 15),
+          //     cursorColor: kActiveColor,
+          //     decoration: InputDecoration(
+          //       hintText: "숫자만 입력해주세요",
+          //       hintStyle: TextStyle(
+          //           fontSize: 14,
+          //           fontWeight: FontWeight.w500,
+          //           color: Colors.grey[500]),
+          //       fillColor: Colors.grey[100],
+          //       contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          //       border: InputBorder.none,
+          //     ),
+          //     validator: (String value) {
+          //       if (value.isEmpty) {
+          //         return '핸드폰 번호를 입력해주세요';
+          //       }
+          //       return null;
+          //     },
+          //   ),
+          // ),
 
-          VerticalSpacing(of: 20),
+          // VerticalSpacing(of: 20),
           // Row(
           //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
           //   children: [
@@ -366,7 +366,6 @@ class _SignUpFormState extends State<SignUpForm> {
                               .set({
                             'name': _name.text,
                             'email': _email.text,
-                            'phone': _phone.text,
                           });
                           showDialog(
                               context: context,

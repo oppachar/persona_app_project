@@ -190,13 +190,18 @@ class _BodyState extends State<Body> {
         alignment: Alignment.center,
         child: Column(
           children: [
+            VerticalSpacing(),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
               children: [
                 Column(
                   children: [
-                    Icon(Icons.circle, color: kActiveColor),
+                    Icon(
+                      Icons.circle,
+                      color: kActiveColor,
+                      size: 20,
+                    ),
                     Text(
                       "Front",
                       style: kBodyTextStyle,
@@ -208,8 +213,8 @@ class _BodyState extends State<Body> {
                   children: [
                     SvgPicture.asset(
                       "assets/icons/camera.svg",
-                      width: 21,
-                      height: 21,
+                      width: 17,
+                      height: 17,
                     ),
                     VerticalSpacing(of: 2),
                     Text(
@@ -269,7 +274,7 @@ class _BodyState extends State<Body> {
       case CameraLensDirection.back:
         return CupertinoIcons.switch_camera;
       case CameraLensDirection.front:
-        return CupertinoIcons.switch_camera_solid;
+        return CupertinoIcons.switch_camera;
       case CameraLensDirection.external:
         return Icons.camera;
       default:

@@ -39,7 +39,6 @@ class _BottomNavBarState extends State<BottomNavBar> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      appBar: _selectedIndex != 2 ? buildAppBar(context) : null,
       body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
         elevation: 4,
@@ -71,7 +70,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
 
   AppBar buildAppBar(BuildContext context) {
     return AppBar(
-      elevation: 0,
+      elevation: 1,
       title: Image.asset(
         "assets/icons/logo.png",
         width: 100,

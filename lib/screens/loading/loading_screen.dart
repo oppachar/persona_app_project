@@ -3,18 +3,23 @@ import 'package:flutter/material.dart';
 import 'package:persona/constants.dart';
 import 'package:persona/screens/face_analysis_results/face_analysis_results_screen.dart';
 
-class LoadingScreen extends StatelessWidget {
+class LoadingScreen extends StatefulWidget {
   final User user;
   LoadingScreen(this.user);
   @override
+  _LoadingScreenState createState() => _LoadingScreenState();
+}
+
+class _LoadingScreenState extends State<LoadingScreen> {
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-        future: Future.delayed(Duration(milliseconds: 10000)),
+        future: Future.delayed(Duration(milliseconds: 21000)),
         builder: (context, snapshot) {
-// Checks whether the future is resolved, ie the duration is over
-          if (snapshot.connectionState == ConnectionState.done)
-            return FaceAnanlysisScreen(user);
-          else
+          // Checks whether the future is resolved, ie the duration is over
+          if (snapshot.connectionState == ConnectionState.done) {
+            return FaceAnanlysisScreen(widget.user);
+          } else
             return Scaffold(
               body: Center(
                 child: Text(

@@ -34,12 +34,12 @@ class _SignInFormState extends State<SignInForm> {
           VerticalSpacing(
             of: 30,
           ),
-          Text(
-            " 이메일",
-            textScaleFactor: 1,
-            style: TextStyle(
-                fontSize: 13, fontWeight: FontWeight.bold, color: kTextColor),
-          ),
+          // Text(
+          //   " 이메일",
+          //   textScaleFactor: 1,
+          //   style: TextStyle(
+          //       fontSize: 13, fontWeight: FontWeight.bold, color: kTextColor),
+          // ),
           VerticalSpacing(),
           Container(
             decoration: BoxDecoration(
@@ -48,8 +48,12 @@ class _SignInFormState extends State<SignInForm> {
             ),
             child: TextFormField(
               controller: _emailController,
-              style: TextStyle(fontSize: 15),
+              cursorColor: kActiveColor,
+              style: kBodyTextStyle,
               decoration: InputDecoration(
+                hintText: "이메일",
+                hintStyle: TextStyle(
+                    color: Colors.grey[500], fontWeight: FontWeight.w500),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               ),
@@ -62,13 +66,13 @@ class _SignInFormState extends State<SignInForm> {
             ),
           ),
           VerticalSpacing(of: 20),
-          Text(
-            " 비밀번호",
-            textScaleFactor: 1,
-            style: TextStyle(
-                fontSize: 13, fontWeight: FontWeight.bold, color: kTextColor),
-          ),
-          VerticalSpacing(),
+          // Text(
+          //   " 비밀번호",
+          //   textScaleFactor: 1,
+          //   style: TextStyle(
+          //       fontSize: 13, fontWeight: FontWeight.bold, color: kTextColor),
+          // ),
+          // VerticalSpacing(),
           Container(
             decoration: BoxDecoration(
               color: Colors.grey[200],
@@ -76,8 +80,12 @@ class _SignInFormState extends State<SignInForm> {
             ),
             child: TextFormField(
               controller: _passwordController,
-              style: TextStyle(fontSize: 15),
+              style: kBodyTextStyle,
+              cursorColor: kActiveColor,
               decoration: InputDecoration(
+                hintText: "비밀번호",
+                hintStyle: TextStyle(
+                    color: Colors.grey[500], fontWeight: FontWeight.w500),
                 border: InputBorder.none,
                 contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               ),

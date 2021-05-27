@@ -39,13 +39,16 @@ class _BodyState extends State<Body> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: kTextColor),
+                          color: kActiveColor),
                     ),
-                    HorizontalSpacing(of: 20),
+                    HorizontalSpacing(of: 30),
                     Text(
                       widget.user.displayName,
                       textScaleFactor: 1,
-                      style: TextStyle(fontSize: 15, color: Colors.grey[600]),
+                      style: TextStyle(
+                          fontSize: 15,
+                          //fontWeight: FontWeight.w500,
+                          color: kTextColor),
                     ),
                   ],
                 ),
@@ -61,13 +64,16 @@ class _BodyState extends State<Body> {
                       style: TextStyle(
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                          color: kTextColor),
+                          color: kActiveColor),
                     ),
-                    HorizontalSpacing(of: 20),
+                    HorizontalSpacing(of: 30),
                     Text(
                       snapshot.data['phone'],
                       textScaleFactor: 1,
-                      style: TextStyle(fontSize: 15, color: Colors.grey[600]),
+                      style: TextStyle(
+                          fontSize: 15,
+                          //fontWeight: FontWeight.w500,
+                          color: kTextColor),
                     ),
                     HorizontalSpacing(of: 120),
                     InkWell(
